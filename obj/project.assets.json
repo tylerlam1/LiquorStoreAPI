@@ -2801,15 +2801,6 @@
           "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
-      "MySqlConnector/0.63.2": {
-        "type": "package",
-        "compile": {
-          "lib/netcoreapp2.1/MySqlConnector.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.1/MySqlConnector.dll": {}
-        }
-      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -7922,34 +7913,6 @@
         "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.xml",
         "mysql.data.entityframeworkcore.8.0.19.nupkg.sha512",
         "mysql.data.entityframeworkcore.nuspec"
-      ]
-    },
-    "MySqlConnector/0.63.2": {
-      "sha512": "Evp3Xq8XSA4MoiTK4c3Z7h72yOk4qobZBCzWnCJenKass8mV8WGp8A7nJVbwy5Yq3xI9sOEr/4aPZTtLgIsErg==",
-      "type": "package",
-      "path": "mysqlconnector/0.63.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/MySqlConnector.dll",
-        "lib/net45/MySqlConnector.xml",
-        "lib/net461/MySqlConnector.dll",
-        "lib/net461/MySqlConnector.xml",
-        "lib/net471/MySqlConnector.dll",
-        "lib/net471/MySqlConnector.xml",
-        "lib/netcoreapp2.1/MySqlConnector.dll",
-        "lib/netcoreapp2.1/MySqlConnector.xml",
-        "lib/netcoreapp3.0/MySqlConnector.dll",
-        "lib/netcoreapp3.0/MySqlConnector.xml",
-        "lib/netstandard1.3/MySqlConnector.dll",
-        "lib/netstandard1.3/MySqlConnector.xml",
-        "lib/netstandard2.0/MySqlConnector.dll",
-        "lib/netstandard2.0/MySqlConnector.xml",
-        "lib/netstandard2.1/MySqlConnector.dll",
-        "lib/netstandard2.1/MySqlConnector.xml",
-        "logo.png",
-        "mysqlconnector.0.63.2.nupkg.sha512",
-        "mysqlconnector.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -13359,8 +13322,7 @@
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.10",
       "MySql.Data >= 8.0.19",
-      "MySql.Data.EntityFrameworkCore >= 8.0.19",
-      "MySqlConnector >= 0.63.2"
+      "MySql.Data.EntityFrameworkCore >= 8.0.19"
     ]
   },
   "packageFolders": {
@@ -13439,10 +13401,6 @@
           "MySql.Data.EntityFrameworkCore": {
             "target": "Package",
             "version": "[8.0.19, )"
-          },
-          "MySqlConnector": {
-            "target": "Package",
-            "version": "[0.63.2, )"
           }
         },
         "imports": [

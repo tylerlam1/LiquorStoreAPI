@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CPSC471_Proj.Models;
+using MySql.Data.MySqlClient;
 
 namespace CPSC471_Proj.Controllers
 {
@@ -19,10 +20,29 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors
-        [HttpGet]
+        [HttpGet("all")]
         public IEnumerable<Liquor> GetLiquor()
         {
-            return _context.Liquor;
+            return _context.Liquor.FromSql("spLiquorGetAll").ToList();
+        }
+
+        // GET: api/Liquors/{liquor_id}/name
+        [HttpGet("{input:int}/name")]
+        public async Task<IActionResult> GetLiquorNameById([FromRoute] int input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.Liquor.FromSql("CALL spLiquorGetNameById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
         }
 
         // GET: api/Liquors/5

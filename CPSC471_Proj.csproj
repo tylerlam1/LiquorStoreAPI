@@ -16,7 +16,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
     <PackageReference Include="MySql.Data" Version="8.0.19" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.19" />
-    <PackageReference Include="MySqlConnector" Version="0.63.2" />
   </ItemGroup>
 
 </Project>

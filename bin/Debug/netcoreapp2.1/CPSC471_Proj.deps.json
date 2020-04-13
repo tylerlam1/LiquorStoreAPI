@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "752db5c9b759635e58e6f5739d13a656bdf723b3"
+    "signature": "3c01291aa48dedcdbe02e3cf1b32e7b1b58e51fe"
   },
   "compilationOptions": {
     "defines": [
@@ -31,8 +31,7 @@
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10",
           "MySql.Data": "8.0.19",
-          "MySql.Data.EntityFrameworkCore": "8.0.19",
-          "MySqlConnector": "0.63.2"
+          "MySql.Data.EntityFrameworkCore": "8.0.19"
         },
         "runtime": {
           "CPSC471_Proj.dll": {}
@@ -480,17 +479,6 @@
         },
         "compile": {
           "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
-        }
-      },
-      "MySqlConnector/0.63.2": {
-        "runtime": {
-          "lib/netcoreapp2.1/MySqlConnector.dll": {
-            "assemblyVersion": "0.63.2.0",
-            "fileVersion": "0.63.2.0"
-          }
-        },
-        "compile": {
-          "lib/netcoreapp2.1/MySqlConnector.dll": {}
         }
       },
       "NETStandard.Library/2.0.3": {
@@ -3966,13 +3954,6 @@
       "sha512": "sha512-MQvizr38a0yUSuiUZvvS1FrGCA1PqunxDbJvs9fGQkBoLV2mua8m4EK4egMatHj7PRVPThsPmYKjEt/WPMU2Qg==",
       "path": "mysql.data.entityframeworkcore/8.0.19",
       "hashPath": "mysql.data.entityframeworkcore.8.0.19.nupkg.sha512"
-    },
-    "MySqlConnector/0.63.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Evp3Xq8XSA4MoiTK4c3Z7h72yOk4qobZBCzWnCJenKass8mV8WGp8A7nJVbwy5Yq3xI9sOEr/4aPZTtLgIsErg==",
-      "path": "mysqlconnector/0.63.2",
-      "hashPath": "mysqlconnector.0.63.2.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",
