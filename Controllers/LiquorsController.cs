@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CPSC471_Proj.Models;
@@ -11,56 +9,56 @@ namespace CPSC471_Proj.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LiquorModelsController : ControllerBase
+    public class LiquorsController : ControllerBase
     {
         private readonly Context _context;
 
-        public LiquorModelsController(Context context)
+        public LiquorsController(Context context)
         {
             _context = context;
         }
 
-        // GET: api/LiquorModels
+        // GET: api/Liquors
         [HttpGet]
-        public IEnumerable<LiquorModel> GetLiquorModels()
+        public IEnumerable<Liquor> GetLiquor()
         {
-            return _context.LiquorModels;
+            return _context.Liquor;
         }
 
-        // GET: api/LiquorModels/5
+        // GET: api/Liquors/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLiquorModel([FromRoute] int id)
+        public async Task<IActionResult> GetLiquor([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var liquorModel = await _context.LiquorModels.FindAsync(id);
+            var liquor = await _context.Liquor.FindAsync(id);
 
-            if (liquorModel == null)
+            if (liquor == null)
             {
                 return NotFound();
             }
 
-            return Ok(liquorModel);
+            return Ok(liquor);
         }
 
-        // PUT: api/LiquorModels/5
+        // PUT: api/Liquors/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLiquorModel([FromRoute] int id, [FromBody] LiquorModel liquorModel)
+        public async Task<IActionResult> PutLiquor([FromRoute] int id, [FromBody] Liquor liquor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != liquorModel.liquor_id)
+            if (id != liquor.liquor_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(liquorModel).State = EntityState.Modified;
+            _context.Entry(liquor).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +66,7 @@ namespace CPSC471_Proj.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LiquorModelExists(id))
+                if (!LiquorExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +79,45 @@ namespace CPSC471_Proj.Controllers
             return NoContent();
         }
 
-        // POST: api/LiquorModels
+        // POST: api/Liquors
         [HttpPost]
-        public async Task<IActionResult> PostLiquorModel([FromBody] LiquorModel liquorModel)
+        public async Task<IActionResult> PostLiquor([FromBody] Liquor liquor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.LiquorModels.Add(liquorModel);
+            _context.Liquor.Add(liquor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(liquorModel), new { id = liquorModel.liquor_id }, liquorModel);
+            return CreatedAtAction("GetLiquor", new { id = liquor.liquor_id }, liquor);
         }
 
-        // DELETE: api/LiquorModels/5
+        // DELETE: api/Liquors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLiquorModel([FromRoute] int id)
+        public async Task<IActionResult> DeleteLiquor([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var liquorModel = await _context.LiquorModels.FindAsync(id);
-            if (liquorModel == null)
+            var liquor = await _context.Liquor.FindAsync(id);
+            if (liquor == null)
             {
                 return NotFound();
             }
 
-            _context.LiquorModels.Remove(liquorModel);
+            _context.Liquor.Remove(liquor);
             await _context.SaveChangesAsync();
 
-            return Ok(liquorModel);
+            return Ok(liquor);
         }
 
-        private bool LiquorModelExists(int id)
+        private bool LiquorExists(int id)
         {
-            return _context.LiquorModels.Any(e => e.liquor_id == id);
+            return _context.Liquor.Any(e => e.liquor_id == id);
         }
     }
 }

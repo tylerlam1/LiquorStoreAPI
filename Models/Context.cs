@@ -9,6 +9,6 @@ namespace CPSC471_Proj.Models
         {
         }
 
-        public DbSet<LiquorModel> LiquorModels { get; set; }
+        public DbSet<Liquor> Liquor { get; set; }
     }
 }
