@@ -35,7 +35,7 @@ namespace CPSC471_Proj.Controllers
                 return BadRequest(ModelState);
             }
 
-            var liquor = await _context.Liquor.FromSql("CALL spLiquorGetNameById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+            var liquor = await _context.LiquorName.FromSql("CALL spLiquorGetNameById (@id)", new MySqlParameter("@id", input)).ToListAsync();
 
             if (liquor == null)
             {

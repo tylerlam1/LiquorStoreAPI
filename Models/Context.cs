@@ -10,5 +10,7 @@ namespace CPSC471_Proj.Models
         }
 
         public DbSet<Liquor> Liquor { get; set; }
+
+        public DbSet<LiquorName> LiquorName { get; set; }
     }
 }
