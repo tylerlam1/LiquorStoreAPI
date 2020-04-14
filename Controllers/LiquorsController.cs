@@ -45,16 +45,35 @@ namespace CPSC471_Proj.Controllers
             return Ok(liquor);
         }
 
-        // GET: api/Liquors/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetLiquor([FromRoute] int id)
+        // GET: api/Liquors/{liquor_id}/description
+        [HttpGet("{input:int}/description")]
+        public async Task<IActionResult> GetLiquorDescriptionById([FromRoute] int input)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var liquor = await _context.Liquor.FindAsync(id);
+            var liquor = await _context.LiquorDescription.FromSql("CALL spLiquorGetDescriptionById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+        }
+
+        // GET: api/Liquors/{liquor_id}/image
+        [HttpGet("{input:int}/image")]
+        public async Task<IActionResult> GetLiquorImageById([FromRoute] int input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorImage.FromSql("CALL spLiquorGetImageById (@id)", new MySqlParameter("@id", input)).ToListAsync();
 
             if (liquor == null)
             {
