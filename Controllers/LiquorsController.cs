@@ -83,6 +83,86 @@ namespace CPSC471_Proj.Controllers
             return Ok(liquor);
         }
 
+
+        // ADDED:
+        // GET: api/Liquors/{liquor_id}/price
+        [HttpGet("{input:int}/price")]
+        public async Task<IActionResult> GetLiquorPriceById([FromRoute] int input){
+        
+             if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorPrice.FromSql("CALL spLiquorGetPriceById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+        
+        
+        
+        
+        }
+
+        // ADDED:
+        // GET: api/Liquors/{liquor_id}/sale_percentage
+        [HttpGet("{input:int}/sale_percentage")]
+        public async Task<IActionResult> GetLiquorSalePercentageById([FromRoute] int input)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorSalePercentage.FromSql("CALL spLiquorGetSalePercentageById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+
+
+
+
+        }
+
+        // GET: api/Liquors/{liquor_id}/sale_length
+        [HttpGet("{input:int}/sale_length")]
+        public async Task<IActionResult> GetLiquorSaleLengthById([FromRoute] int input)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorSaleLength.FromSql("CALL spLiquorGetSaleLengthById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+
+
+
+
+        }
+
+
+
+
+
+
+
         // PUT: api/Liquors/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLiquor([FromRoute] int id, [FromBody] Liquor liquor)
