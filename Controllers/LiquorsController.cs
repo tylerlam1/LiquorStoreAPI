@@ -20,6 +20,7 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors
+        // Get all information from all liquor products
         [HttpGet("all")]
         public IEnumerable<Liquor> GetLiquor()
         {
@@ -27,6 +28,7 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors/sale
+        // Get all information from all liquor products that are on sale (where sale length and sale percentage are greater than 0)
         [HttpGet("sale")]
         public IEnumerable<Liquor> GetLiquorOnSale()
         {
@@ -34,9 +36,11 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors/{liquor_id}/name
+        // Get the liquor name from a liquor product using liquor ID
         [HttpGet("{input:int}/name")]
         public async Task<IActionResult> GetLiquorNameById([FromRoute] int input)
         {
+            // checks if the database can be reached
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -44,6 +48,7 @@ namespace CPSC471_Proj.Controllers
 
             var liquor = await _context.LiquorName.FromSql("CALL spLiquorGetNameById (@id)", new MySqlParameter("@id", input)).ToListAsync();
 
+            // checks if there was a return. If not, return a 404
             if (liquor == null)
             {
                 return NotFound();
@@ -53,9 +58,11 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors/{liquor_id}/description
+        // Get the liquor description from a liquor product using liquor ID
         [HttpGet("{input:int}/description")]
         public async Task<IActionResult> GetLiquorDescriptionById([FromRoute] int input)
         {
+            // checks if the database can be reached
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -63,6 +70,7 @@ namespace CPSC471_Proj.Controllers
 
             var liquor = await _context.LiquorDescription.FromSql("CALL spLiquorGetDescriptionById (@id)", new MySqlParameter("@id", input)).ToListAsync();
 
+            // checks if there was a return. If not, return a 404
             if (liquor == null)
             {
                 return NotFound();
@@ -72,9 +80,11 @@ namespace CPSC471_Proj.Controllers
         }
 
         // GET: api/Liquors/{liquor_id}/image
+        // Get the liquor image link from a liquor product using liquor ID
         [HttpGet("{input:int}/image")]
         public async Task<IActionResult> GetLiquorImageById([FromRoute] int input)
         {
+            // checks if the database can be reached
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -82,6 +92,7 @@ namespace CPSC471_Proj.Controllers
 
             var liquor = await _context.LiquorImage.FromSql("CALL spLiquorGetImageById (@id)", new MySqlParameter("@id", input)).ToListAsync();
 
+            // checks if there was a return. If not, return a 404
             if (liquor == null)
             {
                 return NotFound();
