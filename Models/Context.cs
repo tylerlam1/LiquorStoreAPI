@@ -17,9 +17,6 @@ namespace CPSC471_Proj.Models
 
         public DbSet<LiquorImage> LiquorImage { get; set; }
 
-
-
-        // ADDED:
         public DbSet<LiquorPrice> LiquorPrice { get; set; }
 
         public DbSet<LiquorSalePercentage> LiquorSalePercentage { get; set; }
@@ -29,9 +26,6 @@ namespace CPSC471_Proj.Models
         public DbSet<LiquorQuantity> LiquorQuantity { get; set; }
 
         public DbSet<LiquorVolume> LiquorVolume { get; set; }
-
-
-
 
         public DbSet<StoreName> StoreName { get; set; }
     }

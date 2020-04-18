@@ -26,6 +26,13 @@ namespace CPSC471_Proj.Controllers
             return _context.Liquor.FromSql("spLiquorGetAll").ToList();
         }
 
+        // GET: api/Liquors/sale
+        [HttpGet("sale")]
+        public IEnumerable<Liquor> GetLiquorOnSale()
+        {
+            return _context.Liquor.FromSql("spLiquorGetAllSale").ToList();
+        }
+
         // GET: api/Liquors/{liquor_id}/name
         [HttpGet("{input:int}/name")]
         public async Task<IActionResult> GetLiquorNameById([FromRoute] int input)
