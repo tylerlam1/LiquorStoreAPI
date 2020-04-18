@@ -102,10 +102,6 @@ namespace CPSC471_Proj.Controllers
             }
 
             return Ok(liquor);
-        
-        
-        
-        
         }
 
         // ADDED:
@@ -127,10 +123,6 @@ namespace CPSC471_Proj.Controllers
             }
 
             return Ok(liquor);
-
-
-
-
         }
 
         // GET: api/Liquors/{liquor_id}/sale_length
@@ -152,9 +144,6 @@ namespace CPSC471_Proj.Controllers
 
             return Ok(liquor);
 
-
-
-
         }
 
         // Get: api/Liquors/{liquor_id}/quantity
@@ -175,12 +164,7 @@ namespace CPSC471_Proj.Controllers
             }
 
             return Ok(liquor);
-
-
-
-
         }
-
 
         // Get: api/Liquors/{liquor_id}/volume
         [HttpGet("{input:int}/volume")]
@@ -200,95 +184,65 @@ namespace CPSC471_Proj.Controllers
             }
 
             return Ok(liquor);
-
-
-
-
         }
 
-
-
-
-
-
-
-
-        // PUT: api/Liquors/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutLiquor([FromRoute] int id, [FromBody] Liquor liquor)
+        // PUT: api/Liquors/image
+        [HttpPut("image")]
+        public async Task<IActionResult> PutLiquorImageById([FromBody] Liquor liquor_body)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != liquor.liquor_id)
-            {
-                return BadRequest();
-            }
+            MySqlParameter image_link = new MySqlParameter("@link", liquor_body.image_link);
+            MySqlParameter liquor_id = new MySqlParameter("@id", liquor_body.liquor_id);
 
-            _context.Entry(liquor).State = EntityState.Modified;
+            var value = await _context.Database.ExecuteSqlCommandAsync("CALL spLiquorPutImageLinkByID (@id, " +
+                  "@link)", liquor_id, image_link);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LiquorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return getPostAndPutStatus(value);
         }
 
         // POST: api/Liquors
         [HttpPost]
-        public async Task<IActionResult> PostLiquor([FromBody] Liquor liquor)
+        public async Task<IActionResult> PostLiquor([FromBody] Liquor liquor_body)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Liquor.Add(liquor);
-            await _context.SaveChangesAsync();
+            MySqlParameter id = new MySqlParameter("@id", liquor_body.liquor_id);
+            MySqlParameter name = new MySqlParameter("@name", liquor_body.name);
+            MySqlParameter type = new MySqlParameter("@type", liquor_body.type);
+            MySqlParameter price = new MySqlParameter("@price", liquor_body.price);
+            MySqlParameter quantity = new MySqlParameter("@quantity", liquor_body.price);
+            MySqlParameter description = new MySqlParameter("@description", liquor_body.description);
+            MySqlParameter supplier_id = new MySqlParameter("@supplier_id", liquor_body.supplier_id);
+            MySqlParameter clerk_id = new MySqlParameter("@clerk_id", liquor_body.clerk_id);
+            MySqlParameter image_link = new MySqlParameter("@image_link", liquor_body.image_link);
+            MySqlParameter bottle_volume = new MySqlParameter("@bottle_volume", liquor_body.bottle_volume);
+            MySqlParameter sale_percentage = new MySqlParameter("@sale_percentage", liquor_body.sale_percentage);
+            MySqlParameter sale_length = new MySqlParameter("@sale_length", liquor_body.sale_length);
 
-            return CreatedAtAction("GetLiquor", new { id = liquor.liquor_id }, liquor);
+             var value = await _context.Database.ExecuteSqlCommandAsync("CALL spLiquorPost (@id, " +
+                "@name, @type, @price, @quantity, @description, @supplier_id, @clerk_id, " +
+                "@image_link, @bottle_volume, @sale_percentage, @sale_length)", id, name, 
+                type, price, quantity, description, supplier_id, clerk_id, image_link,
+                bottle_volume, sale_percentage, sale_length);
+
+            return getPostAndPutStatus(value);
         }
 
-        // DELETE: api/Liquors/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLiquor([FromRoute] int id)
+        public IActionResult getPostAndPutStatus(int value)
         {
-            if (!ModelState.IsValid)
+            if (value == 1)
             {
-                return BadRequest(ModelState);
+                return Ok();
             }
 
-            var liquor = await _context.Liquor.FindAsync(id);
-            if (liquor == null)
-            {
-                return NotFound();
-            }
-
-            _context.Liquor.Remove(liquor);
-            await _context.SaveChangesAsync();
-
-            return Ok(liquor);
+            return NotFound();
         }
-
-        private bool LiquorExists(int id)
-        {
-            return _context.Liquor.Any(e => e.liquor_id == id);
-        }
-
-       
     }
 }
