@@ -2,6 +2,7 @@
 
 namespace CPSC471_Proj.Models
 {
+    // model for liquor product that only has ID and description
     public class LiquorDescription
     {
         [Key]
