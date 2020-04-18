@@ -2,6 +2,7 @@
 
 namespace CPSC471_Proj.Models
 {
+    // model for all attributes in a liquor product
     public class Liquor
     {
         [Key]
