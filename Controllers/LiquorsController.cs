@@ -157,6 +157,56 @@ namespace CPSC471_Proj.Controllers
 
         }
 
+        // Get: api/Liquors/{liquor_id}/quantity
+        [HttpGet("{input:int}/quantity")]
+        public async Task<IActionResult> GetLiquorQuantityById([FromRoute] int input)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorQuantity.FromSql("CALL spLiquorGetQuantityById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+
+
+
+
+        }
+
+
+        // Get: api/Liquors/{liquor_id}/volume
+        [HttpGet("{input:int}/volume")]
+        public async Task<IActionResult> GetLiquorVolumeById([FromRoute] int input)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var liquor = await _context.LiquorVolume.FromSql("CALL spLiquorGetVolumeById (@id)", new MySqlParameter("@id", input)).ToListAsync();
+
+            if (liquor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(liquor);
+
+
+
+
+        }
+
+
 
 
 
@@ -238,5 +288,7 @@ namespace CPSC471_Proj.Controllers
         {
             return _context.Liquor.Any(e => e.liquor_id == id);
         }
+
+       
     }
 }
