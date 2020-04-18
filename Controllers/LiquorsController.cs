@@ -1,4 +1,15 @@
-﻿using System.Collections.Generic;
+﻿/**
+ * Authors: Gurnoor Aujila, Tyler Lam, Kamalpreet Mundi
+ * 
+ * This class is a controller class used to access and return data from the database.
+ * In this case our database is the liquor_store database.
+ * This controller in particular is only responsible for a specific table.
+ * In this case that table is the liquor table from the database.
+ * 
+ * **/
+
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;

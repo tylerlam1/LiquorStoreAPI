@@ -1,4 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/**
+ * Authors: Tyler Lam, Kamalpreet Mundi, Gurnoor Aujila
+ * 
+ * This class is a model class used to return specific data from the database.
+ * In this case we are returning everything from the liquor table.
+ * **/
+
+using System.ComponentModel.DataAnnotations;
 
 namespace CPSC471_Proj.Models
 {
